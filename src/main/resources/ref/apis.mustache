@@ -1,0 +1,34 @@
+import {
+{{#models}}{{#model}}    {{classname}},
+{{/model}}{{/models}}} from './models';
+
+export type ERRORUNKNOWN = any;
+
+{{#apiInfo}}
+/* apiInfo */
+{{#apis}}
+/* apis */
+{{#operations}}
+/* operations */
+{{#operation}}
+/* operation */
+export interface {{httpMethod}} {
+    /**
+    * {{&notes}}
+    */
+    '{{path}}': {
+        in: {{#hasParams}}{
+{{#pathParams}}            {{paramName}}{{^required}}?{{/required}}: {{{dataType}}};
+{{/pathParams}}
+{{#queryParams}}            {{paramName}}{{^required}}?{{/required}}: {{{dataType}}};
+{{/queryParams}}
+        }{{/hasParams}}{{^hasParams}}void{{/hasParams}}{{#bodyParams}} & {{{dataType}}}{{/bodyParams}};
+        out: {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}};
+{{#responses}}        {{code}}: {{#dataType}}{{{dataType}}}{{/dataType}}{{^dataType}}void{{/dataType}};
+{{/responses}}
+    }
+}
+{{/operation}}
+{{/operations}}
+{{/apis}}
+{{/apiInfo}}

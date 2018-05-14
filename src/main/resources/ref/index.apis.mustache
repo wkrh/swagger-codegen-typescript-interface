@@ -1,0 +1,17 @@
+{{#apiInfo}}
+{{#apis}}
+import * as {{classFilename}} from './apis/{{classFilename}}';
+{{/apis}}
+
+export type GET =
+{{#apis}}    {{classFilename}}.GET &
+{{/apis}}    void;
+
+export type POST =
+{{#apis}}    {{classFilename}}.POST &
+{{/apis}}    void;
+
+export type DELETE =
+{{#apis}}    {{classFilename}}.DELETE &
+{{/apis}}    void;
+{{/apiInfo}}
