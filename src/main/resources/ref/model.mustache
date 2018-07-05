@@ -1,6 +1,0 @@
-{{#models}}
-{{#tsImports}}
-import { {{classname}} } from './{{filename}}';
-{{/tsImports}}
-{{#model}}{{#isEnum}}{{>modelEnum}}{{/isEnum}}{{^isEnum}}{{>modelGeneric}}{{/isEnum}}{{/model}}
-{{/models}}

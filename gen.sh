@@ -11,10 +11,10 @@
 # -DdebugSupportingFiles prints additional data passed to the template engine
 
 java\
-  -cp target/typescript-interface-1.0.0.jar:target/dependency/swagger-codegen-cli-2.3.1.jar\
+  -cp target/typescript-interface-swagger-codegen-1.0.0.jar:target/dependency/swagger-codegen-cli-2.3.1.jar\
   io.swagger.codegen.SwaggerCodegen\
   generate\
   -l typescript-interface\
   -o out\
-  -i testdata/petstore_simple.yaml 
+  -i testdata/petstore_simple.yaml\
   $*

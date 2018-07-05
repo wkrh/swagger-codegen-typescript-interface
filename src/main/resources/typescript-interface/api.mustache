@@ -1,28 +1,33 @@
+{{#imports}}
+import { {{import}} } from '../models/{{import}}';
+{{/imports}}
 
-# This is a sample api mustache template.  It is representing a ficticous 
-# language and won't be usable or compile to anything without lots of changes.
-# Use it as an example.  You can access the variables in the generator object
-# like such:
+export type ERRORUNKNOWN = any;
 
-# use the package from the `apiPackage` variable
-package: {{package}}
-
-# operations block
 {{#operations}}
-classname: {{classname}}
-
-# loop over each operation in the API:
+/* operations */
 {{#operation}}
-
-# each operation has an `operationId`:
-operationId: {{operationId}}
-
-# and parameters:
-{{#allParams}}
-{{paramName}}: {{dataType}}
-{{/allParams}}
-
+/* operation */
+export interface {{httpMethod}} {
+    /**
+    * {{&notes}}
+    */
+    '{{path}}': {
+        in: {{#hasParams}}{
+{{#pathParams}}            {{paramName}}{{^required}}?{{/required}}: {{{dataType}}};
+{{/pathParams}}
+{{#queryParams}}            {{paramName}}{{^required}}?{{/required}}: {{{dataType}}};
+{{/queryParams}}
+        }{{/hasParams}}{{^hasParams}}void{{/hasParams}}{{#bodyParams}} & {{{dataType}}}{{/bodyParams}};
+        out: {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}};
+{{#responses}}        {{code}}: {{#dataType}}{{{dataType}}}{{/dataType}}{{^dataType}}void{{/dataType}};
+{{/responses}}
+    }
+}
 {{/operation}}
-
-# end of operations block
 {{/operations}}
+
+/* dummies */
+export interface GET { }
+export interface POST { }
+export interface DELETE { }
